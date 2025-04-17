@@ -303,7 +303,7 @@ def post_webhook(req: func.HttpRequest) -> func.HttpResponse:
                     send_message_via_whatsapp(user_id, wa_message)
                     
                     finalizeForm(user_id)
-                    
+                    session.clear()
                     return func.HttpResponse(body=json.dumps({"status": "success" , "message":wa_message }), mimetype="application/json")
                 else:
                     wa_message =  "The final validation of your form failed. Please review your inputs."
