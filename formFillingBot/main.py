@@ -123,7 +123,7 @@ def extract_fields_with_openai(prompt, user_input, session, step_fields):
     except Exception as e:
         traceback.print_exc() 
         print("\nInvalid JSON ::::::::::: ", response_content , "\n=======================================================")
-        logging.error(f"Error extracting fields with OpenAI: {e}")
+        print(f"Error extracting fields with OpenAI: {e}")
         return {}, False, "Error processing your input. Please try again."
 
 
@@ -133,7 +133,7 @@ def extract_fields_with_openai(prompt, user_input, session, step_fields):
 
 def post_webhook(req: func.HttpRequest) -> func.HttpResponse:
         """Handle incoming WhatsApp messages."""
-        logging.info('Python HTTP trigger function processed a request.')
+        print('Python HTTP trigger function processed a request.')
         wa_message = ""
         try:
             data = req.get_json()
@@ -323,7 +323,7 @@ def post_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
         except Exception as e:
             traceback.print_exc() 
-            logging.error(f"Error processing request: {e}")
+            print(f"Error processing request: {e}")
             return func.HttpResponse(body=json.dumps({"status": "error", "message": str(e)}), mimetype="application/json", status_code=500)
 
 
@@ -343,7 +343,7 @@ def get_webhook(req: func.HttpRequest) -> func.HttpResponse:
     challenge = req.params.get("hub.challenge")
 
     if mode == "subscribe" and token == WEBHOOK_VERIFY_TOKEN:
-        logging.info("Webhook verified successfully!")
+        print("Webhook verified successfully!")
         return func.HttpResponse(challenge, status_code=200)
     else:
         return func.HttpResponse("Forbidden", status_code=403)
