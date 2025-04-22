@@ -281,7 +281,7 @@ def post_webhook(req: func.HttpRequest) -> func.HttpResponse:
                     # This if block should proceed when any stage is left for completion.
                     if not session.get("current_step") == "completed":
                         # step is complete, valid, confirmed (also not the final step)       
-                        wa_message = f"Thank your for your confirmation, we will proceed to Next Step."
+                        wa_message = f"Thank you for your confirmation, Shall we proceed to Next Step?"
                         print("\nStep complete-",wa_message)
                         send_message_via_whatsapp(user_id, wa_message)
                         return func.HttpResponse(body=json.dumps({"status": "success", "message":wa_message  }), mimetype="application/json")
@@ -289,7 +289,7 @@ def post_webhook(req: func.HttpRequest) -> func.HttpResponse:
                 else :                  
                     session["confirmation_pending"] = True
                     collected_data = json.dumps(session["data"], indent=2)
-                    wa_message = f"Here are the details you provided for this step:\n{collected_data}\n\nplease give your final confirmation ? (Reply 'Yes' to confirm or 'No' to edit)"
+                    wa_message = f"Here are the details you provided for this step:\n{collected_data}\n\nPlease give your final confirmation ?(Reply 'I confirm' to confirm or state the changes you want to do.)"
                     print("\nStep complete-",wa_message)
                     send_message_via_whatsapp(user_id, wa_message)
                     return func.HttpResponse(body=json.dumps({"status": "success", "message":wa_message  }), mimetype="application/json")
