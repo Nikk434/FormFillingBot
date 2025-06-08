@@ -1,8 +1,11 @@
 # Import required modules
 
-import logging
-import os
-import requests
+# import logging
+# import os
+# import requests
+import os, sys
+import time
+sys.path.append(os.path.abspath('E:/New folder/FormFillingBot'))
 from azure.functions import HttpRequest, HttpResponse
 import azure.functions as func
 
